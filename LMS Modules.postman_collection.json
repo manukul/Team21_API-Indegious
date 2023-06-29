@@ -100,7 +100,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescForJava}}\",\r\n  \"assignmentId\": \"2385\"asd,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"3020\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"dueDate\": \"2023-06-25T03:02:28.140+00:00\",\r\n  \"createdBy\": \"{{createdBy}}\",  \r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\"\r\n}",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescForJava}}\",\r\n  \"assignmentId\": \"2385\",ab\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"3020\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"dueDate\": \"2023-06-25T03:02:28.140+00:00\",\r\n  \"createdBy\": \"{{createdBy}}\",  \r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -109,7 +109,56 @@
 						},
 						"url": "{{baseurl}}/assignments\n"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Create Assignment details Invalid-Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assignmentDescription\": \"{{assignmentDescForJava}}\",\n  \"assignmentId\": \"2385\",qwer\n  \"assignmentName\": \"\",\n  \"batchId\": \"3020\",\n  \"comments\": \"\",\n  \"dueDate\": \"2023-06-25T03:02:28.140+00:00\",\n  \"createdBy\": \"\",  \n  \"graderId\": \"\",\n  \"pathAttachment1\": \"\",\n  \"pathAttachment2\": \"\",\n  \"pathAttachment3\": \"\",\n  \"pathAttachment4\": \"\",\n  \"pathAttachment5\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseurl}}/assignments"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 29 Jun 2023 19:07:00 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": \"2023-06-29T19:07:01.184+00:00\",\n    \"status\": 400,\n    \"error\": \"Bad Request\",\n    \"path\": \"/lms/assignments\"\n}"
+						}
+					]
 				},
 				{
 					"name": "All Assignment",
@@ -164,9 +213,23 @@
 				},
 				{
 					"name": "GET By Invalid ID-Failed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": "{{baseurl}}/assignments/7895\n"
 					},
 					"response": [
 						{
@@ -239,8 +302,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"pm.test(\"Status code is 40\", function () {",
+									"    pm.response.to.have.status(404);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -358,6 +421,118 @@
 					"response": []
 				},
 				{
+					"name": "Update Assignment Invalid ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/*pm.test(\"Assignment Creation\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData.assignmentDescription)",
+									"   console.log(jsonData.assignmentID )",
+									"   console.log(jsonData.assignmentName)",
+									"   console.log(jsonData.batchID)",
+									"   console.log(jsonData.createdBy)",
+									"   console.log(jsonData.dueDate)",
+									"   console.log(jsonData.graderId)",
+									"   console.log(jsonData.pathAttachment1)",
+									"   console.log(jsonData.pathAttachment2)",
+									"   console.log(jsonData.pathAttachment3)",
+									"   console.log(jsonData.pathAttachment4)",
+									"   console.log(jsonData.pathAttachment5)",
+									"   console.log(jsonData.comments)",
+									"",
+									"    pm.collectionVariables.set(\"assignmentDescription\", jsonData.assignmentDescription);",
+									"     pm.collectionVariables.set(\"assignmentID\", jsonData.assignmentID);",
+									"     pm.collectionVariables.set(\"assignmentName\", jsonData.assignmentName);",
+									"     pm.collectionVariables.set(\"batchID\", jsonData.batchID);",
+									"     pm.collectionVariables.set(\"createdBy\", jsonData.createdBy);",
+									"     pm.collectionVariables.set(\"dueDate\", jsonData.dueDate);",
+									"pm.collectionVariables.set(\"graderId\", jsonData.graderId);",
+									"pm.collectionVariables.set(\"pathAttachment1\", jsonData.pathAttachment1);",
+									"pm.collectionVariables.set(\"pathAttachment2\", jsonData.pathAttachment2);",
+									"pm.collectionVariables.set(\"pathAttachment3\", jsonData.pathAttachment3);",
+									"pm.collectionVariables.set(\"pathAttachment4\", jsonData.pathAttachment4);",
+									"pm.collectionVariables.set(\"pathAttachment5\", jsonData.pathAttachment5);",
+									"pm.collectionVariables.set(\"comments\", jsonData.comments);",
+									"",
+									"});*/",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\n  \"assignmentId\":\"{{assignmentId}}\" ,\n  \"assignmentName\": \"{{assignmentName}}\",\n  \"batchId\": \"2\",\n  \"comments\": \"Updated\",\n  \"createdBy\": \"Team 21\",\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\n  \"graderId\": \"{{graderId}}\",\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments/{{assignmengk"
+					},
+					"response": [
+						{
+							"name": "Update Assignment Copy",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assignmentDescription\": \"\",\n  \"assignmentId\":\"{{assignmentId}}\" ,\n  \"assignmentName\": \"\",\n  \"batchId\": \"2\",\n  \"comments\": \"Updated\",\n  \"createdBy\": \"Team 21\",\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\n  \"graderId\": \"\",\n  \"pathAttachment1\": \"\",\n  \"pathAttachment2\": \"\",\n  \"pathAttachment3\": \"\",\n  \"pathAttachment4\": \"\",\n  \"pathAttachment5\": \"\" }\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseurl}}/assignments/{{assignmengk"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 29 Jun 2023 19:11:21 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": \"2023-06-29T19:11:22.136+00:00\",\n    \"status\": 400,\n    \"error\": \"Bad Request\",\n    \"path\": \"/lms/assignments/%7B%7Bassignmengk\"\n}"
+						}
+					]
+				},
+				{
 					"name": "With ID",
 					"event": [
 						{
@@ -378,6 +553,68 @@
 						"url": "{{baseurl}}/assignments/{{assignmentID}}"
 					},
 					"response": []
+				},
+				{
+					"name": "With Invalid ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseurl}}/assignments/98"
+					},
+					"response": [
+						{
+							"name": "With ID Copy",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{baseurl}}/assignments/98"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 29 Jun 2023 19:13:39 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Assignment not found with Id : 98 \",\n    \"success\": false\n}"
+						}
+					]
 				}
 			]
 		},
@@ -717,7 +954,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{ \"programName\": \"{{programName}}\",\n \"programDescription\": \"{{programDescription}}\",\n  \"programStatus\": \"{{programStatus}}\",\n   \"creationTime\": \"{{$isoTimestamp}}\",\n    \"lastModTime\": \"{{$isoTimestamp}}\" }",
+									"raw": "{ \"programName\": \"\",\n \"programDescription\": \"\",\n  \"programStatus\": \"\",\n   \"creationTime\": \"2023-06-29T20:20:49.145Z\",\n    \"lastModTime\": \"2023-06-29T20:20:49.145Z\" }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -797,7 +1034,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{ \"programName\": \"{{programName}}\",\n \"programDescription\": \"{{programDescription}}\",\n  \"programStatus\": \"{{programStatus}}\",\n   \"creationTime\": \"{{$isoTimestamp}}\",\n    \"lastModTime\": \"{{$isoTimestamp}}\" }",
+									"raw": "{ \"programName\": \"\",\n \"programDescription\": \"\",\n  \"programStatus\": \"\",\n   \"creationTime\": \"2023-06-29T20:20:49.250Z\",\n    \"lastModTime\": \"2023-06-29T20:20:49.250Z\" }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1467,7 +1704,7 @@
 							"originalRequest": {
 								"method": "DELETE",
 								"header": [],
-								"url": "{{baseurl}}/deletebyprogname/{{programName}}"
+								"url": "{{baseurl}}/deletebyprogname/"
 							},
 							"status": "OK",
 							"code": 200,
@@ -1626,7 +1863,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\"userComments\": \"{{comments}}\",\r\n\"userEduPg\": \"{{EduPg}}\",\r\n\"userEduUg\": \"{{EduUg}}\",\r\n\"userFirstName\": \"{{FirstName}}\",\r\n\"userLastName\": \"{{LastName}}\",\r\n\"userLinkedinUrl\": \"{{LinkedinUrl}}\",\r\n\"userLocation\": \"{{Location}}\",\r\n\"userMiddleName\": \"{{MiddleName}}\",\r\n\"userPhoneNumber\": \"{{Phone}}\",\r\n\"userRoleMaps\": [\r\n{\r\n\"roleId\": \"null\",\r\n\"userRoleStatus\": \"{{userrolestatus}}\"\r\n}\r\n],\r\n\"userTimeZone\": \"{{Timezone}}\",\r\n\"userVisaStatus\": \"{{Visastatus}}\"\r\n}\r\n",
+							"raw": "{\r\n\"userComments\": \"{{comments}}\",\r\n\"userEduPg\": \"{{EduPg}}\"\r\n\"userEduUg\": \"{{EduUg}}\",\r\n\"userFirstName\": \"{{FirstName}}\",\r\n\"userLastName\": \"{{LastName}}\",\r\n\"userLinkedinUrl\": \"{{LinkedinUrl}}\",\r\n\"userLocation\": \"{{Location}}\",\r\n\"userMiddleName\": \"{{MiddleName}}\",\r\n\"userPhoneNumber\": \"{{Phone}}\",\r\n\"userRoleMaps\": [\r\n{\r\n\"roleId\": null,\r\n\"userRoleStatus\": \"{{userrolestatus}}\"\r\n}\r\n],\r\n\"userTimeZone\": \"{{Timezone}}\",\r\n\"userVisaStatus\": \"{{Visastatus}}\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1810,8 +2047,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 404\", function () {\r",
-									"    pm.response.to.have.status(404);\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1823,14 +2060,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"userComments\": \"we r very good students\",\r\n  \"userEduPg\": \"{{EduPg}}\",\r\n  \"userEduUg\": \"{{EduUg}}\",\r\n  \"userFirstName\": \"{{FirstName}}\",\r\n  \"userId\": \"{{userId}}\",\r\n  \"userLastName\": \"{{LastName}}\",\r\n  \"userLinkedinUrl\": \"{{LinkedinUrl}}\",\r\n  \"userLocation\": \"{{Location}}\",\r\n \r\n  \"userPhoneNumber\": {{Phone}},\r\n  \"userTimeZone\": \"{{Timezone}}\",\r\n  \"userVisaStatus\": \"{{Visastatus}}\"\r\n}\r\n\r\n",
+							"raw": "{\r\n  \"userComments\": \"we r very good students\",\r\n  \"userEduPg\": \"{{EduPg}}\",\r\n  \"userEduUg\": \"{{EduUg}}\",\r\n  \"userFirstName\": \"{{FirstName}}\",\r\n  \"userId\": null,\r\n  \"userLastName\": \"{{LastName}}\",\r\n  \"userLinkedinUrl\": \"{{LinkedinUrl}}\",\r\n  \"userLocation\": \"{{Location}}\",\r\n \r\n  \"userPhoneNumber\": ,\r\n  \"userTimeZone\": \"{{Timezone}}\",\r\n  \"userVisaStatus\": \"{{Visastatus}}\"\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{baseurl}}/users/users/{{userID}}"
+						"url": "{{baseurl}}/users/users/30"
 					},
 					"response": []
 				},
@@ -1882,8 +2119,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1893,8 +2130,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.globals.get(\"programID\");\r",
-									"pm.globals.get(\"batchID\");"
+									";"
 								],
 								"type": "text/javascript"
 							}
@@ -1905,16 +2141,77 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"programId\": {{programID}},\r\n  \"roleId\": \"{{Role_Id}}\",\r\n  \"userId\": \"{{userID}}\",\r\n  \"userRoleProgramBatches\": [\r\n    {\r\n      \"batchId\": {{batchID}},\r\n      \"userRoleProgramBatchStatus\": null\r\n    }\r\n  ]\r\n}\r\n",
+							"raw": "{\r\n  \"programId\": {{programID}},\r\n  \"roleId\": \"{{Role_Id}}\",\r\n  \"userId\": 78,\r\n  \"userRoleProgramBatches\": [\r\n    {\r\n      \"batchId\": {{batchID}},\r\n      \"userRoleProgramBatchStatus\": \r\n    }\r\n  ]\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{baseurl}}/users/users/roleProgramBatchStatus/{{userID}}"
+						"url": "{{baseurl}}/users/roleProgramBatchrequest"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "update user role with invalid program batch status",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"programId\": {{programID}},\r\n  \"roleId\": \"\",\r\n  \"userId\": 78,\r\n  \"userRoleProgramBatches\": [\r\n    {\r\n      \"batchId\": ,\r\n      \"userRoleProgramBatchStatus\": \r\n    }\r\n  ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseurl}}/users/roleProgramBatchrequest"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 29 Jun 2023 19:41:43 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": \"2023-06-29T19:41:43.357+00:00\",\n    \"status\": 404,\n    \"error\": \"Not Found\",\n    \"path\": \"/lms/users/roleProgramBatchrequest\"\n}"
+						}
+					]
 				},
 				{
 					"name": "update User Role Status",
@@ -1954,8 +2251,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 400\", function () {\r",
-									"    pm.response.to.have.status(400);\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1974,7 +2271,7 @@
 								}
 							}
 						},
-						"url": "{{baseurl}}/users/users/roleStatus/{{userID}}"
+						"url": "{{baseurl}}/users/users/roleStatus/78"
 					},
 					"response": []
 				},
